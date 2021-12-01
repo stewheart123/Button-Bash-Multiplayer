@@ -31,10 +31,12 @@ public class PlayerInput : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
+            stream.SendNext(IsPlayerOne);
             stream.SendNext(score);
         }
         else
         {
+            this.IsPlayerOne = (bool)stream.ReceiveNext();
             this.score = (int)stream.ReceiveNext();
         }
         
