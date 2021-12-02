@@ -5,59 +5,47 @@ using UnityEngine.UI;
 
 public class AssignPlayer : MonoBehaviour
 {
-    public GameObject playerOne;
-    public GameObject playerTwo;
-    public int playerOneScore;
-    public int playerTwoScore;
-    [SerializeField] Text playerOneDisplay;
-    [SerializeField] Text playerTwoDisplay;
-    public PlayerInput[] players;
-    
+    [SerializeField] public Text playerOneText;
+    [SerializeField] public Text playerTwoText;
+    private PlayerInput playerOne;
+    private PlayerInput playerTwo;
+    private PlayerInput[] players;
+    public bool updateScoreEnabled = false;
+
+
     void Start()
     {
-        players = FindObjectsOfType<PlayerInput>();
-
-        Debug.Log("players visible =" + players.Length);
-        if(players.Length == 1)
-        {
-            foreach (PlayerInput player in players)
-            {
-                if (player.IsPlayerOne)
-                {
-                    playerOne = player.gameObject;                    
-                }
-                
-            }
-        }
-        if(players.Length == 2)
-        {
-            foreach (PlayerInput player in players)
-            {
-                if (player.IsPlayerOne)
-                {
-                    playerOne = player.gameObject;                    
-                }
-                if (!player.IsPlayerOne)
-                {
-                    playerTwo = player.gameObject;                    
-                }
-            }
-
-        }
+        
 
     }
-
-    void Update()
+    public void AssignPlayers()
     {
-        if(players.Length == 1)
+
+        players = FindObjectsOfType<PlayerInput>();
+
+        foreach(PlayerInput player in players)
         {
-            playerOneDisplay.text = playerOne.GetComponent<PlayerInput>().score.ToString();
-        }
-        if(players.Length == 2)
-        {
-            playerOneDisplay.text = playerOne.GetComponent<PlayerInput>().score.ToString();
-            playerTwoDisplay.text = playerTwo.GetComponent<PlayerInput>().score.ToString();
+            if (player.IsPlayerOne)
+            {
+                playerOne = player;
+            }
+            else
+            {
+                playerTwo = player;
+            }
         }
         
     }
+    public void UpdateScore()
+    {
+        playerOneText.text = playerOne.score.ToString();
+        if(playerTwo != null)
+        {
+            playerTwoText.text = playerTwo.score.ToString();
+        }
+        
+    }
+
+
+    
 }
