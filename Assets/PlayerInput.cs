@@ -57,7 +57,7 @@ public class PlayerInput : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 score++;
-                assignPlayer.UpdateScore();
+                //assignPlayer.UpdateScore();
                 //scoreText.text = score.ToString();
                 
                 Debug.Log("button pressed");

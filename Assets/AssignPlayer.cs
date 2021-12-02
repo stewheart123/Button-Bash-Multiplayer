@@ -12,7 +12,6 @@ public class AssignPlayer : MonoBehaviour
     private PlayerInput[] players;
     public bool updateScoreEnabled = false;
 
-
     void Start()
     {
         
@@ -36,13 +35,21 @@ public class AssignPlayer : MonoBehaviour
         }
         
     }
-    public void UpdateScore()
+    private void Update()
     {
-        playerOneText.text = playerOne.score.ToString();
-        if(playerTwo != null)
+        if(playerOne != null)
+        {
+            playerOneText.text = playerOne.score.ToString();
+        }
+        
+        if (playerTwo != null)
         {
             playerTwoText.text = playerTwo.score.ToString();
         }
+    }
+    public void UpdateScore()
+    {
+        
         
     }
 
